@@ -8,7 +8,8 @@
 .buildlog/
 .history
 .svn/
-res/test.rc
+#value of the file from resources
+/res/test.jpg
 
 # IntelliJ related
 *.iml
