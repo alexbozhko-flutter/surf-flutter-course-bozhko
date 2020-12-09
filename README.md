@@ -1,6 +1,6 @@
 # places
 
-Flutter Surf courses project
+Surf Flutter Course Education Project
 
 ## Getting Started
 
