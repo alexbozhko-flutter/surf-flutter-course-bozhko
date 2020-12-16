@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
 
-int counter = 0;
+// int counter = 0;
 void main() {
-  runApp(MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+    Type getContRuntimeType() {
+      return context.runtimeType;
+    }
 
-        home: MyFirestWidget(),
-      //home: MySecondWidget(),
+    print(
+        'getContRuntimeTypeApp ${getContRuntimeType()}'); //getContRuntimeTypeApp StatelessElement
+    // print('canPop ${Navigator.of(context).canPop()}'); // Проверил пример из видео
+    return MaterialApp(
+      title: 'My Title Flutter Demo', //
+
+      // home: MyFirstWidget(),
+      home: MySecondWidget(),
     );
   }
 }
 
-class MyFirestWidget extends StatelessWidget {
+class MyFirstWidget extends StatelessWidget {
   @override
   int _counter = 0;
 
   Widget build(BuildContext context) {
-    counter++;
-    _counter++;
-
-    //Глобальная переменная увеличит значение
-    print('Вызов ${counter}');
-    //Локальныя переменная, обнулится
-    print('Вызов localCounter ${_counter}');
+    Type getContRuntimeType() {
+      return context.runtimeType;
+    }
+    //Для наглядности повесил вызов на кнопку
     return Container(
+      color: Colors.blue,
       child: Center(
-        child: Text('Hello!'),
+        child: MaterialButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
+          elevation: 18.0,
+          color: Color(0xFF801E48),
+          child: Text('Click me!',
+              style: TextStyle(fontSize: 16.0, color: Colors.white)),
+          onPressed: () {
+            print(
+                'Runtime Type Is: ${getContRuntimeType()}'); //Выводит: Runtime Type Is: StatelessElement
+          },
+        ),
       ),
     );
   }
@@ -64,15 +64,28 @@ class _MySecondWidgetState extends State<MySecondWidget> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      _counter++;
-    });
-    print('Вызов ${_counter}');
+    Type _getContRuntimeType() {
+      return context.runtimeType;
+    }
 
+   // print('canPop ${Navigator.of(context).canPop()}'); //Тут работает
+
+    //Для наглядности повесил вызов на кнопку
     return Container(
+      color: Color(0xFF801E48),
       child: Center(
-        // child: Text('Hello! '+'$counter'),
-        child: Text('Hello!'),
+        child: MaterialButton(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),
+          elevation: 18.0,
+          color: Colors.blue,
+          child: Text('Click me!',
+              style: TextStyle(fontSize: 16.0, color: Colors.white)),
+          onPressed: () {
+            print(
+                'Runtime Type Is: ${_getContRuntimeType()}'); //Выводит: Runtime Type Is: StatelessElement
+          },
+        ),
       ),
     );
   }
