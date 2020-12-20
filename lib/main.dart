@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'ui/screen/sight_list_sreen.dart';
+
 // int counter = 0;
 void main() {
   runApp(App());
@@ -20,7 +22,8 @@ class App extends StatelessWidget {
       title: 'My Title Flutter Demo', //
 
       // home: MyFirstWidget(),
-      home: MySecondWidget(),
+      // home: MySecondWidget(),
+      home: SightListScreen(),
     );
   }
 }
