@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 TextStyle largeTitle = TextStyle(
   color: Color(0xff3B3E5B), //hex color из css макета
   fontFamily: 'Roboto',
-  fontSize: 42.0, //фонт пришлось увеличить принудительно, похоже размер шрифта
+  fontSize: 32.0, //фонт пришлось увеличить принудительно, похоже размер шрифта
   // в RichText воспроизводится неправильно (см. ниже по коду)
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
@@ -13,8 +13,9 @@ TextStyle largeTitle = TextStyle(
 
 TextStyle largeTitleGreen = TextStyle(
   color: Color(0xff4CAF50), //hex color из css макета
+// В данном случае остальные параметры можно не дублировать
   fontFamily: 'Roboto',
-  fontSize: 42.0,
+  fontSize: 32.0,
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
 );
@@ -22,18 +23,40 @@ TextStyle largeTitleGreen = TextStyle(
 TextStyle largeTitleYellow = TextStyle(
   color: Color(0xffFCDD3D), //hex color из css макета
   fontFamily: 'Roboto',
-  fontSize: 42.0,
+  fontSize: 32.0,
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
 );
 
-// StatefulWidget для задания 4.2
+/// TextSpan для отображения заголовка AppBar'а
+TextSpan appBarTitle = TextSpan(
+    style: largeTitle,
+    children: [
+      TextSpan(
+        text: 'С',
+        style: largeTitleGreen,
+      ),
+      TextSpan(
+        text: 'писок',
+      ),
+      TextSpan(
+        text: '\nи',
+        style: largeTitleYellow,
+      ),
+      TextSpan(
+        text: 'нтересных мест',
+      ),
+    ]);
+
+
+/// StatefulWidget для задания 4.2
 class SightListScreen extends StatefulWidget {
   @override
   _SightListScreenState createState() => _SightListScreenState();
 }
 
-// реализация состояния
+
+/// реализация состояния
 class _SightListScreenState extends State<SightListScreen> {
   @override
   Widget build(BuildContext context) {
@@ -59,37 +82,27 @@ class _SightListScreenState extends State<SightListScreen> {
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
           // style: largeTitle,
-          style: DefaultTextStyle.of(context).style,
+          style: largeTitle,
         ),
 */
 
-        title: RichText(
+        title:
+// Если использовать нижеследующий код, то размер шрифта будет точно таким же,
+// как и при использовании виджета Text (визуально это будет соответствовать
+// макету).
+/*        Text.rich(appBarTitle,
+            maxLines: 3, // ограничение в 3 строки
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.left,
+            ),
+*/
+// данный вариант соответствует заданию
+        RichText(
+          text: appBarTitle,
           maxLines: 3, // ограничение в 3 строки
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
-          text: TextSpan(
-              // text: '', //  можно и без св-ва text
-              style: largeTitle,
-
-              children: [
-                TextSpan(
-                  text: 'С',
-                  style: largeTitleGreen,
-                ),
-                TextSpan(
-                  text: 'писок ',
-                ),
-                TextSpan(
-                  text: 'и',
-                  style: largeTitleYellow,
-                ),
-                TextSpan(
-                  text: 'нтересных мест',
-                ),
-
-              ]),
         ),
-
       ),
     );
   }
