@@ -31,7 +31,7 @@ class _SightListScreenState extends State<SightListScreen> {
         elevation: 0.0, //убирает тень appbar'а
 
         title: Text(
-          'Список интересных мест',
+          'Список\nинтересных мест',
           maxLines: 3, // ограничение в 3 строки
           overflow: TextOverflow.ellipsis,
           textAlign: TextAlign.left,
