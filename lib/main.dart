@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
-
 import 'ui/screen/sight_list_sreen.dart';
+import 'package:flutter/services.dart';
 
 // int counter = 0;
 void main() {
+  // Таком образом мы явно задаём цвет статусбара, а точнее -
+  // убираем его затенение, чтобы он соответствовал макету
+  // По аналогии с проилолжением Facebook (белый Appbar И белый Statusbar)
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+  ));
+
   runApp(App());
 }
 
