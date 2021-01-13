@@ -83,7 +83,7 @@ class SightCard extends StatelessWidget {
                     // Название (name) достопримечательности
                     RichText(
                       text: TextSpan(
-                        style: stylesightName,
+                        style: styleSightName,
                         text: sight.name,
                       ),
                       maxLines: 2, // ограничение в 3 строки
