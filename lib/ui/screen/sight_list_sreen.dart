@@ -46,6 +46,7 @@ class _SightListScreenState extends State<SightListScreen> {
         brightness: Brightness.light, // status bar brightness
         toolbarHeight: 88,
         elevation: 0.0, //убирает тень appbar'а
+
         title:
             RichText(
           text: appBarTitle,
