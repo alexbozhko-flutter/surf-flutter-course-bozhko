@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:places/ui/screen/sight_card.dart';
+import 'mocks.dart';
 import 'ui/screen/sight_list_sreen.dart';
 import 'package:flutter/services.dart';
 
@@ -31,7 +33,11 @@ class App extends StatelessWidget {
 
       // home: MyFirstWidget(),
       // home: MySecondWidget(),
-      home: SightListScreen(),
+       home: SightListScreen(),
+      // home: SightCard(sight: mocks[0]),
+
+
+
     );
   }
 }
