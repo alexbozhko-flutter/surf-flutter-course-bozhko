@@ -10,6 +10,7 @@ TextStyle largeTitle = TextStyle(
   fontStyle: FontStyle.normal,
 );
 
+
 TextStyle styleSightName = TextStyle(
   color: Color(0xff3B3E5B), //hex color из css макета
   fontFamily: 'Roboto',
@@ -28,6 +29,7 @@ TextStyle styleSightType = TextStyle(
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
 );
+
 
 /// Текстовый стиль детализация достопримечательности
 TextStyle styleSightDetails = TextStyle(

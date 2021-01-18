@@ -34,7 +34,7 @@ class App extends StatelessWidget {
 
       home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
-      // home: SightDetails(sight: mocks[1]),
+
     );
   }
 }
