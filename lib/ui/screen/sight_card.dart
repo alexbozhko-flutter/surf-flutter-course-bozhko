@@ -33,8 +33,7 @@ class SightCard extends StatelessWidget {
                 ),
                 color: Color(0xFF801E48),
               ),
-              // color: Color(0xFF801E48),
-              // height: 96.0,
+
               alignment: Alignment.topLeft,
               child: Stack(
                 children: [
