@@ -44,10 +44,27 @@ class SightDetails extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: Color(0xFF801E48),
+          // контейнер нужен для отображения индикатора
           height: 360.0,
           child: Stack(
             children: [
+              Image.network(
+                sight.url,
+                fit: BoxFit.fitHeight,
+                height: 360,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes
+                          : null,
+                    ),
+                  );
+                },
+              ),
               Positioned(
                 left: 16,
                 top: 36,

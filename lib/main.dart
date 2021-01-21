@@ -32,9 +32,9 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'My Title Flutter Demo', //
 
-      home: SightListScreen(),
+      // home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
-      // home: SightDetails(sight: mocks[1]),
+      home: SightDetails(sight: mocks[1]),
     );
   }
 }
