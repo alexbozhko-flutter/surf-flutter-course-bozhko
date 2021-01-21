@@ -79,8 +79,8 @@ class _SightListScreenState extends State<SightListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-
       appBar: SightListAppBar(),
+
 
       body: SingleChildScrollView(
         child: Column(
