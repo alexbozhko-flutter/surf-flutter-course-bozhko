@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/styles.dart';
@@ -24,47 +25,59 @@ class SightCard extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
       child: Column(
         children: [
-          AspectRatio(
-            aspectRatio: 3 / 1,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(16),
-                ),
-                color: Color(0xFF801E48),
-              ),
-
-              alignment: Alignment.topLeft,
-              child: Stack(
-                children: [
-                  Positioned(
-                      left: 16,
-                      top: 16,
-                      child: //Text.rich(
-                          // Тип (Type) достопримечательности
-                          RichText(
-                        text: TextSpan(
-                          style: styleSightType,
-                          text: sight.type,
+          Stack(
+            children: [
+              AspectRatio(
+                aspectRatio: 3 / 1,
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(16.0)),
+                  child: Image.network(
+                    sight.url,
+                    fit: BoxFit.fitWidth,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child:
+                            //LinearProgressIndicator( // Круговой индикатор смотрится уместнее
+                            CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes
+                              : null,
                         ),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.left,
-                      )),
-                  Positioned(
-                    right: 16,
-                    top: 16,
-                    child: //Text.rich(
-                        Container(
-                      // иконка (заглушка)
-                      color: Colors.white,
-                      width: 24.0,
-                      height: 24.0,
-                    ),
+                      );
+                    },
                   ),
-                ],
+                ),
               ),
-            ),
+              Positioned(
+                  left: 16,
+                  top: 16,
+                  child: //Text.rich(
+                      // Тип (Type) достопримечательности
+                      RichText(
+                    text: TextSpan(
+                      style: styleSightType,
+                      text: sight.type,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.left,
+                  )),
+              Positioned(
+                right: 16,
+                top: 16,
+                child: //Text.rich(
+                    Container(
+                  // иконка (заглушка)
+                  color: Colors.white,
+                  width: 24.0,
+                  height: 24.0,
+                ),
+              ),
+            ],
           ),
           AspectRatio(
             aspectRatio: 3 / 1,
@@ -88,24 +101,14 @@ class SightCard extends StatelessWidget {
                       child: ConstrainedBox(
                         constraints:
                             BoxConstraints(maxWidth: scrWidth / 2 - 32),
-                        child: Container(
-                          color: Color(0xffC4C4C4),
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                              left: 3.0,
-                              top: 2.0,
-                              right: 9.0,
-                            ),
-                            child: RichText(
-                              text: TextSpan(
-                                style: styleSightName,
-                                text: sight.name,
-                              ),
-                              maxLines: 3, // ограничение в 3 строки
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.left,
-                            ),
+                        child: RichText(
+                          text: TextSpan(
+                            style: styleSightName,
+                            text: sight.name,
                           ),
+                          maxLines: 3, // ограничение в 3 строки
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
                         ),
                       ),
                     ),
