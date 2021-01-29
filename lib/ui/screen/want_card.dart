@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/styles.dart';
 
-TextSpan appBarTitle = TextSpan(
-  style: largeTitle,
-  text: "Список \nинтересных мест",
-);
 
-class SightCard extends StatelessWidget {
+/// Карта посещенного места
+
+class WantCard extends StatelessWidget {
+// Будет сделано наследование от общего предка для всех трёх карт
+// Не уверен, что каждый класс должен быть в отдельном файле, но пока так
+
   final Sight sight;
+  final String planedCaption;
 
-  const SightCard({Key key, this.sight}) : super(key: key);
+  const WantCard({Key key, this.sight, this.planedCaption}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class SightCard extends StatelessWidget {
                 aspectRatio: 3 / 1,
                 child: ClipRRect(
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16.0)),
+                  BorderRadius.vertical(top: Radius.circular(16.0)),
                   child: Image.network(
                     sight.url,
                     fit: BoxFit.fitWidth,
@@ -41,11 +43,11 @@ class SightCard extends StatelessWidget {
                       if (loadingProgress == null) return child;
                       return Center(
                         child:
-                            //LinearProgressIndicator( // Круговой индикатор смотрится уместнее
-                            CircularProgressIndicator(
+                        //LinearProgressIndicator( // Круговой индикатор смотрится уместнее
+                        CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
-                                  loadingProgress.expectedTotalBytes
+                              loadingProgress.expectedTotalBytes
                               : null,
                         ),
                       );
@@ -57,8 +59,8 @@ class SightCard extends StatelessWidget {
                   left: 16,
                   top: 16,
                   child: //Text.rich(
-                      // Тип (Type) достопримечательности
-                      RichText(
+                  // Тип (Type) достопримечательности
+                  RichText(
                     text: TextSpan(
                       style: styleSightType,
                       text: sight.type,
@@ -71,9 +73,20 @@ class SightCard extends StatelessWidget {
                 right: 16,
                 top: 16,
                 child: //Text.rich(
-                    Container(
+                Image.asset(
                   // иконка (заглушка)
-                  color: Colors.white,
+                  'res/images/heart.png',
+                  width: 24.0,
+                  height: 24.0,
+                ),
+              ),
+              Positioned(
+                right: 56,
+                top: 16,
+                child: //Text.rich(
+                Image.asset(
+                  'res/images/calendar.png',
+                  // иконка (заглушка)
                   width: 24.0,
                   height: 24.0,
                 ),
@@ -99,17 +112,30 @@ class SightCard extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints(maxWidth: scrWidth / 2 - 32),
-                        child: RichText(
-                          text: TextSpan(
-                            style: styleSightName,
-                            text: sight.name,
+                      child: RichText(
+                        text: TextSpan(
+                          style: styleSightName,
+                          text: sight.name,
+                        ),
+                        maxLines: 3, // ограничение в 3 строки
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: SizedBox(
+                          height: 28,
+                          child: RichText(
+                            text: TextSpan(
+                              style: stylePlaned,
+                              text: this.planedCaption,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
                           ),
-                          maxLines: 3, // ограничение в 3 строки
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
                         ),
                       ),
                     ),
@@ -139,9 +165,4 @@ class SightCard extends StatelessWidget {
 
 
   }
-
-  }
-
-
-
-
+}
