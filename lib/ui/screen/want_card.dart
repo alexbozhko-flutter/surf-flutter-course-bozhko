@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/ui/app_colors.dart';
+import 'package:places/ui/captions.dart';
+import 'package:places/ui/icons.dart';
 import 'package:places/ui/styles.dart';
-
 
 /// Карта посещенного места
 
@@ -17,13 +19,6 @@ class WantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Type getContRuntimeType() {
-      return context.runtimeType;
-    }
-
-    // Ширина экрана
-    var scrWidth = MediaQuery.of(context).size.width;
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
       child: Column(
@@ -34,7 +29,7 @@ class WantCard extends StatelessWidget {
                 aspectRatio: 3 / 1,
                 child: ClipRRect(
                   borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(16.0)),
+                      BorderRadius.vertical(top: Radius.circular(16.0)),
                   child: Image.network(
                     sight.url,
                     fit: BoxFit.fitWidth,
@@ -42,12 +37,10 @@ class WantCard extends StatelessWidget {
                         ImageChunkEvent loadingProgress) {
                       if (loadingProgress == null) return child;
                       return Center(
-                        child:
-                        //LinearProgressIndicator( // Круговой индикатор смотрится уместнее
-                        CircularProgressIndicator(
+                        child: CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes
+                                  loadingProgress.expectedTotalBytes
                               : null,
                         ),
                       );
@@ -56,40 +49,29 @@ class WantCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  left: 16,
-                  top: 16,
-                  child: //Text.rich(
-                  // Тип (Type) достопримечательности
-                  RichText(
-                    text: TextSpan(
-                      style: styleSightType,
-                      text: sight.type,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                  )),
+                left: 16,
+                top: 16,
+                child:
+                    // Тип (Type) достопримечательности
+                    RichText(
+                  text: TextSpan(
+                    style: styleSightType,
+                    text: sight.type,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                ),
+              ),
               Positioned(
                 right: 16,
                 top: 16,
-                child: //Text.rich(
-                Image.asset(
-                  // иконка (заглушка)
-                  'res/images/heart.png',
-                  width: 24.0,
-                  height: 24.0,
-                ),
+                child: icoHeart, // Заглушка
               ),
               Positioned(
                 right: 56,
                 top: 16,
-                child: //Text.rich(
-                Image.asset(
-                  'res/images/calendar.png',
-                  // иконка (заглушка)
-                  width: 24.0,
-                  height: 24.0,
-                ),
+                child: icoCalendar, // Заглушка
               ),
             ],
           ),
@@ -100,7 +82,7 @@ class WantCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(16),
                 ),
-                color: Color(0xFFF5F5F5),
+                color: clInactiveGrey,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -146,8 +128,7 @@ class WantCard extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             style: styleSightDetails,
-                            // text: sight.details,
-                            text: "закрыто до 20:00",
+                            text: lblClosedMock,
                           ),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
@@ -162,7 +143,5 @@ class WantCard extends StatelessWidget {
         ],
       ),
     );
-
-
   }
 }

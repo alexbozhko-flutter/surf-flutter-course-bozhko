@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/ui/app_colors.dart';
+import 'package:places/ui/captions.dart';
 import 'package:places/ui/styles.dart';
 
 TextSpan appBarTitle = TextSpan(
   style: largeTitle,
-  text: "Список \nинтересных мест",
+  text: lblSightList,
 );
 
 class SightCard extends StatelessWidget {
@@ -40,9 +42,7 @@ class SightCard extends StatelessWidget {
                         ImageChunkEvent loadingProgress) {
                       if (loadingProgress == null) return child;
                       return Center(
-                        child:
-                            //LinearProgressIndicator( // Круговой индикатор смотрится уместнее
-                            CircularProgressIndicator(
+                        child: CircularProgressIndicator(
                           value: loadingProgress.expectedTotalBytes != null
                               ? loadingProgress.cumulativeBytesLoaded /
                                   loadingProgress.expectedTotalBytes
@@ -54,24 +54,24 @@ class SightCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  left: 16,
-                  top: 16,
-                  child: //Text.rich(
-                      // Тип (Type) достопримечательности
-                      RichText(
-                    text: TextSpan(
-                      style: styleSightType,
-                      text: sight.type,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    textAlign: TextAlign.left,
-                  )),
+                left: 16,
+                top: 16,
+                child:
+                    // Тип (Type) достопримечательности
+                    RichText(
+                  text: TextSpan(
+                    style: styleSightType,
+                    text: sight.type,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                ),
+              ),
               Positioned(
                 right: 16,
                 top: 16,
-                child: //Text.rich(
-                    Container(
+                child: Container(
                   // иконка (заглушка)
                   color: Colors.white,
                   width: 24.0,
@@ -87,7 +87,7 @@ class SightCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(16),
                 ),
-                color: Color(0xFFF5F5F5),
+                color: clInactiveGrey,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -120,8 +120,7 @@ class SightCard extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             style: styleSightDetails,
-                            // text: sight.details,
-                            text: "закрыто до 20:00",
+                            text: lblClosedMock,
                           ),
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
@@ -136,12 +135,5 @@ class SightCard extends StatelessWidget {
         ],
       ),
     );
-
-
   }
-
-  }
-
-
-
-
+}
