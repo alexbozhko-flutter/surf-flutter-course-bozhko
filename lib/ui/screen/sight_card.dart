@@ -56,9 +56,8 @@ class SightCard extends StatelessWidget {
               Positioned(
                 left: 16,
                 top: 16,
-                child:
-                    // Тип (Type) достопримечательности
-                    RichText(
+                child: RichText(
+                  // Тип (Type) достопримечательности
                   text: TextSpan(
                     style: styleSightType,
                     text: sight.type,

@@ -73,7 +73,7 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: bottomNavigationBar,
+      bottomNavigationBar: new PlacesBottomNavigationBar(),
     );
   }
 }

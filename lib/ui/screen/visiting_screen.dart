@@ -106,18 +106,18 @@ class _VisitingScreenState extends State<VisitingScreen> {
         ),
         body: TabBarView(
           children: [
-            WantList(),
-            VisitedList(),
+            wantListView(),
+            visitedListView(),
           ],
         ),
-        bottomNavigationBar: bottomNavigationBar,
+        bottomNavigationBar: new PlacesBottomNavigationBar(),
       ),
     );
   }
 }
 
 /// Список "Хочу посетить"
-Widget WantList() {
+Widget wantListView() {
   // пока формируется из моковых данных
   if (wantList.length > 0) {
     return SingleChildScrollView(
@@ -158,7 +158,7 @@ Widget WantList() {
 }
 
 /// Список посещенных мест
-Widget VisitedList() {
+Widget visitedListView() {
   if (visitedList.length > 0) {
     return SingleChildScrollView(
       child: Column(
