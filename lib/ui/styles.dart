@@ -49,6 +49,7 @@ TextStyle visitingTitle = TextStyle(
   fontStyle: FontStyle.normal,
 );
 
+
 TextStyle styleSightName = TextStyle(
   color: clIndicatorColor, //hex color из css макета
   fontFamily: 'Roboto',
@@ -67,6 +68,7 @@ TextStyle styleSightType = TextStyle(
   fontWeight: FontWeight.bold,
   fontStyle: FontStyle.normal,
 );
+
 
 /// Текстовый стиль детализация достопримечательности
 TextStyle styleSightDetails = TextStyle(

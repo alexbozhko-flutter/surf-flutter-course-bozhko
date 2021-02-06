@@ -38,6 +38,7 @@ class App extends StatelessWidget {
       // home: SightCard(sight: mocks[0]),
       // home: SightDetails(sight: mocks[1]),
       home: VisitingScreen(),
+
     );
   }
 }
