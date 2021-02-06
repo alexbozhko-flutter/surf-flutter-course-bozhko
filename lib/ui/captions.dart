@@ -1,0 +1,14 @@
+/// Строковые константы, для отображения надписей (visiting_screen)
+const String lblFavorites = 'Избранное';
+const String lblVisited = 'Посетил';
+const String lblWantVisit = 'Хочу посетить';
+const String lblEmptyWantListCaption =
+    'Отмечайте понравившиеся \nместа и они появиятся здесь.';
+const String lblEmpty = 'Пусто';
+const String lblFinishRout = 'Завершите маршрут,\nчтобы место попало сюда.';
+
+/// Строковые константы, для отображения надписей (sight_card)
+const String lblSightList = "Список \nинтересных мест";
+
+/// Строковые константы, для отображения надписей (want_card/visited_card/sight_details)
+const String lblClosedMock = "закрыто до 20:00";

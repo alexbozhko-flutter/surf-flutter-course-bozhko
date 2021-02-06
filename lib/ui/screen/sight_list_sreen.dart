@@ -1,27 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
+import 'package:places/ui/bottom_nav_bar.dart';
 import 'package:places/ui/screen/sight_card.dart';
 import 'package:places/ui/styles.dart';
-
-// Сразу вынес стиль в переменную, вероятно придётся использовать его в других
-// формах.
-
-TextStyle largeTitleGreen = TextStyle(
-  color: Color(0xff4CAF50), //hex color из css макета
-// В данном случае остальные параметры можно не дублировать
-  fontFamily: 'Roboto',
-  fontSize: 32.0,
-  fontWeight: FontWeight.bold,
-  fontStyle: FontStyle.normal,
-);
-
-TextStyle largeTitleYellow = TextStyle(
-  color: Color(0xffFCDD3D), //hex color из css макета
-  fontFamily: 'Roboto',
-  fontSize: 32.0,
-  fontWeight: FontWeight.bold,
-  fontStyle: FontStyle.normal,
-);
 
 /// TextSpan для отображения заголовка AppBar'а
 TextSpan appBarTitle = TextSpan(
@@ -34,7 +15,8 @@ const barHeight = 72;
 /// Кастомный AppBar
 class SightListAppBar extends StatefulWidget implements PreferredSizeWidget {
   SightListAppBar({Key key})
-      : preferredSize = Size.fromHeight(72), // константу или выражение сюда подставить нельзя
+      : preferredSize = Size.fromHeight(
+            72), // константу или выражение сюда подставить нельзя
         super(key: key);
 
   @override
@@ -80,8 +62,6 @@ class _SightListScreenState extends State<SightListScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: SightListAppBar(),
-
-
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -93,6 +73,7 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
+      bottomNavigationBar: new PlacesBottomNavigationBar(),
     );
   }
 }

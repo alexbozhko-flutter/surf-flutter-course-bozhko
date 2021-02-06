@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
+import 'package:places/ui/app_colors.dart';
+import 'package:places/ui/captions.dart';
 import 'package:places/ui/styles.dart';
 
 /// экран детализации места
@@ -37,8 +39,7 @@ class SightDetails extends StatelessWidget {
     ///
     TextSpan sightDetailsSubType = TextSpan(
       style: styleSightSubTypeScrDetail,
-      text:
-          'закрыто до 9:00', // совершенно неясно, как получать это. Пока заглушка
+      text: lblClosedMock, // совершенно неясно, как получать это. Пока заглушка
     );
 
     return Column(
@@ -68,8 +69,7 @@ class SightDetails extends StatelessWidget {
               Positioned(
                 left: 16,
                 top: 36,
-                child: //Text.rich(
-                    Container(
+                child: Container(
                   // иконка (заглушка)
                   color: Colors.white,
                   width: 36.0,
@@ -114,21 +114,22 @@ class SightDetails extends StatelessWidget {
                     child: RichText(text: tsDetail),
                   ),
                   Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 24, 16, 0),
-                      child: Container(
-                        height: 48.0,
-                        decoration: BoxDecoration(
-                          color: Color(0xff4CAF50),
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                      )),
+                    padding: const EdgeInsets.fromLTRB(16.0, 24, 16, 0),
+                    child: Container(
+                      height: 48.0,
+                      decoration: BoxDecoration(
+                        color: clGreenCaption,
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16.0, 24, 16, 0),
                     child: Container(
                       // Непонятный прозрачный бордер на макете
                       height: 0.8,
                       // Согласно stackowerflow 40 позволяет задать прозрачность
-                      color: Color(0x407C7E92),
+                      color: clTabBarColorTransparent,
                     ),
                   ),
                   Padding(
@@ -142,7 +143,7 @@ class SightDetails extends StatelessWidget {
                             padding: const EdgeInsets.all(1.0),
                             child: Container(
                               height: 40.0,
-                              color: Color(0xFF801E48),
+                              color: clMockContrast,
                             ),
                           ),
                         ),
@@ -152,7 +153,7 @@ class SightDetails extends StatelessWidget {
                             padding: const EdgeInsets.all(1.0),
                             child: Container(
                               height: 40.0,
-                              color: Color(0xFF801E48),
+                              color: clMockContrast,
                             ),
                           ),
                         ),

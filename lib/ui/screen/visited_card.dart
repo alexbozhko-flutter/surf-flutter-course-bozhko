@@ -3,26 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/captions.dart';
+import 'package:places/ui/icons.dart';
 import 'package:places/ui/styles.dart';
 
-TextSpan appBarTitle = TextSpan(
-  style: largeTitle,
-  text: lblSightList,
-);
+/// Карта посещенного места
+class VisitedCard extends StatelessWidget {
+// Будет сделано наследование от общего предка для всех трёх карт
+// Не уверен, что каждый класс должен быть в отдельном файле, но пока так
 
-class SightCard extends StatelessWidget {
   final Sight sight;
+  final String visitedCaption;
 
-  const SightCard({Key key, this.sight}) : super(key: key);
+  const VisitedCard({Key key, this.sight, this.visitedCaption})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Type getContRuntimeType() {
       return context.runtimeType;
     }
-
-    // Ширина экрана
-    var scrWidth = MediaQuery.of(context).size.width;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
@@ -56,8 +55,9 @@ class SightCard extends StatelessWidget {
               Positioned(
                 left: 16,
                 top: 16,
-                child: RichText(
-                  // Тип (Type) достопримечательности
+                child:
+                    // Тип (Type) достопримечательности
+                    RichText(
                   text: TextSpan(
                     style: styleSightType,
                     text: sight.type,
@@ -70,12 +70,12 @@ class SightCard extends StatelessWidget {
               Positioned(
                 right: 16,
                 top: 16,
-                child: Container(
-                  // иконка (заглушка)
-                  color: Colors.white,
-                  width: 24.0,
-                  height: 24.0,
-                ),
+                child: icoHeart,
+              ),
+              Positioned(
+                right: 56,
+                top: 16,
+                child: icoShare,
               ),
             ],
           ),
@@ -98,17 +98,30 @@ class SightCard extends StatelessWidget {
                     ),
                     Align(
                       alignment: Alignment.topLeft,
-                      child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints(maxWidth: scrWidth / 2 - 32),
-                        child: RichText(
-                          text: TextSpan(
-                            style: styleSightName,
-                            text: sight.name,
+                      child: RichText(
+                        text: TextSpan(
+                          style: styleSightName,
+                          text: sight.name,
+                        ),
+                        maxLines: 3, // ограничение в 3 строки
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 2.0),
+                        child: SizedBox(
+                          height: 28,
+                          child: RichText(
+                            text: TextSpan(
+                              style: styleSightDetails,
+                              text: this.visitedCaption,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.left,
                           ),
-                          maxLines: 3, // ограничение в 3 строки
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.left,
                         ),
                       ),
                     ),
