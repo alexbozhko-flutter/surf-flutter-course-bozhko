@@ -53,6 +53,14 @@ Image icoShare = Image.asset(
 Image icoCalendar = Image.asset(
 // иконка (заглушка)
   'res/images/calendar.png',
+
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка-суффикс для поля поиска
+Image icoSuffix = Image.asset(
+  'res/images/suffix_icon.png',
   width: 24.0,
   height: 24.0,
 );

@@ -1,43 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:places/mocks.dart';
 import 'package:places/ui/screen/sight_details.dart';
 import 'package:places/ui/screen/sight_card.dart';
-
-import 'mocks.dart';
+import 'package:provider/provider.dart';
+import 'ui/screen/res/themes.dart';
 import 'ui/screen/sight_list_sreen.dart';
-import 'package:flutter/services.dart';
 import 'package:places/ui/screen/visiting_screen.dart';
 
-// int counter = 0;
+// Используем Provider
 void main() {
-  // Таком образом мы явно задаём цвет статусбара, а точнее -
-  // убираем его затенение, чтобы он соответствовал макету
-  // По аналогии с проилолжением Facebook (белый Appbar И белый Statusbar)
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    statusBarIconBrightness: Brightness.light,
-  ));
-
-  runApp(App());
+  runApp(
+    ChangeNotifierProvider<ThemeModel>(
+      create: (context) => ThemeModel(),
+      child: App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Type getContRuntimeType() {
-      return context.runtimeType;
-    }
-
-    print(
-        'getContRuntimeTypeApp ${getContRuntimeType()}'); //getContRuntimeTypeApp StatelessElement
-    // print('canPop ${Navigator.of(context).canPop()}'); // Проверил пример из видео
     return MaterialApp(
-      title: 'My Title Flutter Demo', //
-
+      title: 'My Title Flutter Demo',
+      theme: Provider.of<ThemeModel>(context).currentTheme,
+      // theme: lightTheme, // Чтобы посмотреть другие экраны
+      home: VisitingScreen(),
       // home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
       // home: SightDetails(sight: mocks[1]),
-      home: VisitingScreen(),
     );
   }
 }

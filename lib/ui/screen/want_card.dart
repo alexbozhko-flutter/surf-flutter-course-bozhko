@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/captions.dart';
 import 'package:places/ui/icons.dart';
-import 'package:places/ui/styles.dart';
 
 /// Карта посещенного места
-
 class WantCard extends StatelessWidget {
 // Будет сделано наследование от общего предка для всех трёх карт
 // Не уверен, что каждый класс должен быть в отдельном файле, но пока так
@@ -55,7 +52,7 @@ class WantCard extends StatelessWidget {
                     // Тип (Type) достопримечательности
                     RichText(
                   text: TextSpan(
-                    style: styleSightType,
+                    style: Theme.of(context).primaryTextTheme.headline5,
                     text: sight.type,
                   ),
                   maxLines: 2,
@@ -82,7 +79,7 @@ class WantCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(16),
                 ),
-                color: clInactiveGrey,
+                color: Theme.of(context).backgroundColor,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -96,7 +93,7 @@ class WantCard extends StatelessWidget {
                       alignment: Alignment.topLeft,
                       child: RichText(
                         text: TextSpan(
-                          style: styleSightName,
+                          style: Theme.of(context).primaryTextTheme.bodyText1,
                           text: sight.name,
                         ),
                         maxLines: 3, // ограничение в 3 строки
@@ -112,7 +109,12 @@ class WantCard extends StatelessWidget {
                           height: 28,
                           child: RichText(
                             text: TextSpan(
-                              style: stylePlaned,
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText2
+                                  .copyWith(
+                                    color: Theme.of(context).accentColor,
+                                  ),
                               text: this.planedCaption,
                             ),
                             overflow: TextOverflow.ellipsis,
@@ -127,7 +129,7 @@ class WantCard extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 2.0),
                         child: RichText(
                           text: TextSpan(
-                            style: styleSightDetails,
+                            style: Theme.of(context).primaryTextTheme.caption,
                             text: lblClosedMock,
                           ),
                           overflow: TextOverflow.ellipsis,

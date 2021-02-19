@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
-import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/captions.dart';
-import 'package:places/ui/styles.dart';
 
-TextSpan appBarTitle = TextSpan(
-  style: largeTitle,
-  text: lblSightList,
-);
-
+/// Карта достопримечательностей
 class SightCard extends StatelessWidget {
+// Вполне вероятно, что тут уместно использовать виджет Card
+// Но оставил как изначально было в задании
   final Sight sight;
 
   const SightCard({Key key, this.sight}) : super(key: key);
@@ -59,7 +55,7 @@ class SightCard extends StatelessWidget {
                 child: RichText(
                   // Тип (Type) достопримечательности
                   text: TextSpan(
-                    style: styleSightType,
+                    style: Theme.of(context).primaryTextTheme.headline5,
                     text: sight.type,
                   ),
                   maxLines: 2,
@@ -86,7 +82,7 @@ class SightCard extends StatelessWidget {
                 borderRadius: BorderRadius.vertical(
                   bottom: Radius.circular(16),
                 ),
-                color: clInactiveGrey,
+                color: Theme.of(context).backgroundColor,
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 16.0, right: 16.0),
@@ -99,11 +95,14 @@ class SightCard extends StatelessWidget {
                     Align(
                       alignment: Alignment.topLeft,
                       child: ConstrainedBox(
-                        constraints:
-                            BoxConstraints(maxWidth: scrWidth / 2 - 32),
+                        // Насколько я понимаю, задача была академичкская
+                        // на странице map этого ограничения нет
+                        constraints: BoxConstraints(maxWidth: scrWidth - 64),
+                        // BoxConstraints(maxWidth: scrWidth / 2 - 32),
+
                         child: RichText(
                           text: TextSpan(
-                            style: styleSightName,
+                            style: Theme.of(context).primaryTextTheme.bodyText1,
                             text: sight.name,
                           ),
                           maxLines: 3, // ограничение в 3 строки
@@ -118,7 +117,7 @@ class SightCard extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 2.0),
                         child: RichText(
                           text: TextSpan(
-                            style: styleSightDetails,
+                            style: Theme.of(context).primaryTextTheme.bodyText2,
                             text: lblClosedMock,
                           ),
                           overflow: TextOverflow.ellipsis,

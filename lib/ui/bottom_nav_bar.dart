@@ -19,19 +19,35 @@ class PlacesBottomNavigationBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: [
         BottomNavigationBarItem(
-          icon: icoList,
+          icon: ImageIcon(
+            icoList.image,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
           title: Text(""),
         ),
         BottomNavigationBarItem(
-          icon: icoMap,
+          icon: ImageIcon(
+            icoMap.image,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
           title: Text(""),
         ),
         BottomNavigationBarItem(
-          icon: icoHeart,
+          icon: ImageIcon(
+            icoHeart.image,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
           title: Text(""),
         ),
         BottomNavigationBarItem(
-          icon: icoSettings,
+          icon: ImageIcon(
+            icoSettings.image,
+            color:
+                Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+          ),
           title: Text(""),
         ),
       ],
