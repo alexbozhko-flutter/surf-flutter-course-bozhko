@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
 import 'package:places/ui/screen/sight_details.dart';
 import 'package:places/ui/screen/sight_card.dart';
+import 'package:places/ui/screen/visited_card.dart';
 import 'package:provider/provider.dart';
 import 'ui/screen/res/themes.dart';
 import 'ui/screen/sight_list_sreen.dart';
@@ -25,6 +26,7 @@ class App extends StatelessWidget {
       theme: Provider.of<ThemeModel>(context).currentTheme,
       // theme: lightTheme, // Чтобы посмотреть другие экраны
       home: VisitingScreen(),
+      // home: VisitedCard(),
       // home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
       // home: SightDetails(sight: mocks[1]),

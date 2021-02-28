@@ -68,12 +68,36 @@ class VisitedCard extends StatelessWidget {
               Positioned(
                 right: 16,
                 top: 16,
-                child: icoHeart,
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: IconButton(
+                    padding: EdgeInsets.all(0),
+                    iconSize: 24,
+                    icon: svgIcoCross,
+                    onPressed: () {
+                      print('Cross was pressed');
+                    },
+                  ),
+                ),
+
+                //icoHeart,
               ),
               Positioned(
                 right: 56,
                 top: 16,
-                child: icoShare,
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: IconButton(
+                    padding: EdgeInsets.all(0),
+                    iconSize: 24,
+                    icon: svgIcoShare,
+                    onPressed: () {
+                      print('Share was pressed');
+                    },
+                  ),
+                ),
               ),
             ],
           ),

@@ -44,10 +44,29 @@ final lightTheme = ThemeData(
       borderSide: BorderSide(style: BorderStyle.none, width: 0.0),
     ),
   ),
-  accentIconTheme: IconThemeData( // Помечена как устаревшая,
+  accentIconTheme: IconThemeData(
+    // Помечена как устаревшая,
     // пока оставил специально, чтобы почитать доку
     color: clLightGreen,
     size: 24,
+  ),
+  bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    backgroundColor: clLightWhite,
+    showSelectedLabels: false,
+    showUnselectedLabels: false,
+    selectedItemColor: clLightWhite,
+    unselectedItemColor: clLightWhite,
+    selectedIconTheme: IconThemeData(
+      color: clLightWhite,
+      opacity: 1.0,
+      size: 20.0,
+    ),
+    unselectedIconTheme: IconThemeData(
+      color: clLightWhite,
+      opacity: 1.0,
+      size: 20.0,
+    ),
+    type: BottomNavigationBarType.fixed,
   ),
   primaryTextTheme: TextTheme(
     caption: smallDetailLight,
@@ -59,6 +78,11 @@ final lightTheme = ThemeData(
     bodyText1: textLight,
     bodyText2: smallLight,
     subtitle1: smallSubtitleLight,
+    button: smallBoldDark,
+  ),
+  buttonTheme: ButtonThemeData(
+    buttonColor: clLightWhite,
+    textTheme: ButtonTextTheme.accent,
   ),
 );
 
@@ -135,13 +159,22 @@ final darkTheme = ThemeData(
     bodyText1: textDark,
     bodyText2: smallDark,
     subtitle1: smallSubtitleDark,
+    button: smallBoldDark,
+  ),
+  buttonTheme: ButtonThemeData(
+    buttonColor: clDarkMain,
+    textTheme: ButtonTextTheme.accent,
   ),
 );
 
 enum ThemeType { Light, Dark }
+
 /// Нотификатор для смены темы
 class ThemeModel extends ChangeNotifier {
   ThemeData currentTheme = lightTheme;
+  // Для быстрой смены дефолтной темы
+  // ThemeData currentTheme = darkTheme;
+
   ThemeType _themeType = ThemeType.Light;
 
   toggleTheme() {

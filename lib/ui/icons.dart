@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 /// Картинка для пустого списка посещённых достопримечательностей
 Image icoEmptyVisitedList = Image.asset(
@@ -51,9 +52,7 @@ Image icoShare = Image.asset(
 
 /// Иконка Calendar
 Image icoCalendar = Image.asset(
-// иконка (заглушка)
   'res/images/calendar.png',
-
   width: 24.0,
   height: 24.0,
 );
@@ -64,3 +63,109 @@ Image icoSuffix = Image.asset(
   width: 24.0,
   height: 24.0,
 );
+
+// Задание 5.1
+
+/// Иконка List от BottomNavigationBar, согласно макета
+SvgPicture svgIcoList = SvgPicture.asset(
+  'res/images/icon_list.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Map от BottomNavigationBar, согласно макета
+SvgPicture svgIcoMap = SvgPicture.asset(
+  'res/images/icon_map.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Heart от BottomNavigationBar, согласно макета
+final Widget svgIcoHeart = SvgPicture.asset(
+  'res/images/icon_heart.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Settings от BottomNavigationBar, согласно макета
+SvgPicture svgIcoSettings = SvgPicture.asset(
+  'res/images/icon_settings.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Heart от карты, согласно макета
+SvgPicture svgIcoHeartTransp = SvgPicture.asset(
+  'res/images/icon_heart_transp.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Cross от карты, согласно макета
+SvgPicture svgIcoCross = SvgPicture.asset(
+  'res/images/icon_cross.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Calendar от карты, согласно макета
+SvgPicture svgIcoCalendar = SvgPicture.asset(
+  'res/images/icon_calendar.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Calendar от карты, согласно макета
+SvgPicture svgIcoShare = SvgPicture.asset(
+  'res/images/icon_share.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Arrow от карты, согласно макета
+SvgPicture svgIcoArrow = SvgPicture.asset(
+  'res/images/icon_arrow.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Arrow от карты, согласно макета
+SvgPicture svgIcoPath = SvgPicture.asset(
+  'res/images/icon_path.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка для левой кнопки на экране sight_details
+class SvgIcoCalendar extends StatelessWidget {
+  // цвет проще передать параметром для реализации всяких эффектов
+  final Color color;
+  const SvgIcoCalendar({Key key, this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'res/images/icon_calendar.svg',
+      width: 24.0,
+      height: 24.0,
+      color: color,
+    );
+  }
+}
+
+/// Иконка для правой кнопки на экране sight_details
+class SvgIcoHeart extends StatelessWidget {
+  // цвет проще передать параметром для реализации всяких эффектов
+  final Color color;
+  const SvgIcoHeart.SvgIcoHeartTransp({Key key, this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      'res/images/icon_heart_transp.svg',
+      width: 24.0,
+      height: 24.0,
+      color: color,
+    );
+  }
+}

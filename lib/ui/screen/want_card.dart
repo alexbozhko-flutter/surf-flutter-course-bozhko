@@ -63,12 +63,34 @@ class WantCard extends StatelessWidget {
               Positioned(
                 right: 16,
                 top: 16,
-                child: icoHeart, // Заглушка
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: IconButton(
+                    padding: EdgeInsets.all(0),
+                    iconSize: 24,
+                    icon: svgIcoCross,
+                    onPressed: () {
+                      print('Cross was pressed');
+                    },
+                  ),
+                ),
               ),
               Positioned(
                 right: 56,
                 top: 16,
-                child: icoCalendar, // Заглушка
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: IconButton(
+                    padding: EdgeInsets.all(0),
+                    iconSize: 24,
+                    icon: svgIcoCalendar,
+                    onPressed: () {
+                      print('Calendar was pressed');
+                    },
+                  ),
+                ),
               ),
             ],
           ),

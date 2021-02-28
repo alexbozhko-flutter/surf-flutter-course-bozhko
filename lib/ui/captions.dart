@@ -21,3 +21,7 @@ const String lblChangeTheme = 'Смена темы';
 
 const String lblLight = 'Светлая';
 const String lblDark = 'Тёмная';
+
+const String lblBuildPath = 'ПОСТРОИТЬ МАРШРУТ';
+const String lblPlan = 'Запланировать';
+const String lblFavorit = 'В Избранное';

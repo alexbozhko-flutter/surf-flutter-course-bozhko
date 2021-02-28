@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/ui/captions.dart';
+import 'package:places/ui/icons.dart';
 
 /// Карта достопримечательностей
 class SightCard extends StatelessWidget {
@@ -66,11 +67,17 @@ class SightCard extends StatelessWidget {
               Positioned(
                 right: 16,
                 top: 16,
-                child: Container(
-                  // иконка (заглушка)
-                  color: Colors.white,
-                  width: 24.0,
-                  height: 24.0,
+                child: SizedBox(
+                  height: 24,
+                  width: 24,
+                  child: IconButton(
+                    padding: EdgeInsets.all(0),
+                    iconSize: 24,
+                    icon: svgIcoHeartTransp,
+                    onPressed: () {
+                      print('Calendar was pressed');
+                    },
+                  ),
                 ),
               ),
             ],
