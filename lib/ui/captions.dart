@@ -25,3 +25,18 @@ const String lblDark = 'Тёмная';
 const String lblBuildPath = 'ПОСТРОИТЬ МАРШРУТ';
 const String lblPlan = 'Запланировать';
 const String lblFavorit = 'В Избранное';
+
+const String lblShow = 'ПОКАЗАТЬ';
+const String lblClear = 'Очистить';
+
+const String lblCategories = 'КАТЕГОРИИ';
+const String lblHotels = 'Отели';
+const String lblRest = 'Рестораны';
+const String lblPart = 'Особое\n место';
+const String lblPark = 'Парк';
+const String lblMuseum = 'Музей';
+const String lblCafe = 'Кафе';
+
+const String lblDistantion = 'Расстояние';
+
+

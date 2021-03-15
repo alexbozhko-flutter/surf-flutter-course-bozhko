@@ -129,6 +129,17 @@ SvgPicture svgIcoArrow = SvgPicture.asset(
   height: 24.0,
 );
 
+/// ф-я возвращающая иконку Стрелка назад
+// цвет передаётся в качестве параметра
+Widget coloredIcoArrow(Color icoColor) {
+  return SvgPicture.asset(
+    'res/images/icon_arrow.svg',
+    width: 24.0,
+    height: 24.0,
+    color: icoColor,
+  );
+}
+
 /// Иконка Arrow от карты, согласно макета
 SvgPicture svgIcoPath = SvgPicture.asset(
   'res/images/icon_path.svg',
@@ -160,6 +171,8 @@ class SvgIcoHeart extends StatelessWidget {
   const SvgIcoHeart.SvgIcoHeartTransp({Key key, this.color}) : super(key: key);
 
   @override
+
+  /// Иконка Сердце не заштрихованое
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       'res/images/icon_heart_transp.svg',
@@ -169,3 +182,45 @@ class SvgIcoHeart extends StatelessWidget {
     );
   }
 }
+
+/// Иконка Отели, согласно макета
+SvgPicture svgIcoHotel = SvgPicture.asset(
+  'res/images/icon_hotel.svg',
+  width: 32.0,
+  height: 32.0,
+);
+
+/// Иконка Рестораны, согласно макета
+SvgPicture svgIcoRest = SvgPicture.asset(
+  'res/images/icon_rest.svg',
+  width: 32.0,
+  height: 32.0,
+);
+
+/// Иконка Особое место, согласно макета
+SvgPicture svgIcoParticular = SvgPicture.asset(
+  'res/images/icon_particular.svg',
+  width: 32.0,
+  height: 32.0,
+);
+
+/// Иконка Парк, согласно макета
+SvgPicture svgIcoPark = SvgPicture.asset(
+  'res/images/icon_park.svg',
+  width: 32.0,
+  height: 32.0,
+);
+
+/// Иконка Музей, согласно макета
+SvgPicture svgIcoMuseum = SvgPicture.asset(
+  'res/images/icon_museum.svg',
+  width: 32.0,
+  height: 32.0,
+);
+
+/// Иконка Особое место от карты, согласно макета
+SvgPicture svgIcoCafe = SvgPicture.asset(
+  'res/images/icon_cafe.svg',
+  width: 32.0,
+  height: 32.0,
+);

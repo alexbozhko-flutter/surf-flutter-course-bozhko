@@ -4,6 +4,7 @@ import 'package:places/ui/styles.dart';
 
 /// Светлая тема
 final lightTheme = ThemeData(
+  buttonColor: clLightWhite,
   primaryColor: clLightMain,
   primaryColorDark: clDarkDark,
   scaffoldBackgroundColor: clLightWhite,
@@ -11,6 +12,7 @@ final lightTheme = ThemeData(
   bottomAppBarColor: clLightMain,
   shadowColor: clLightSecondary2,
   accentColor: clLightGreen,
+  dividerColor: clLightGreenTranspanent,
   primarySwatch: lightPrimarySwatch,
   brightness: Brightness.light,
   accentColorBrightness: Brightness.light,
@@ -80,6 +82,10 @@ final lightTheme = ThemeData(
     subtitle1: smallSubtitleLight,
     button: smallBoldDark,
   ),
+  textTheme: TextTheme(
+    button: textButtonGreen,
+    headline1: smallDetailLightMain,
+  ),
   buttonTheme: ButtonThemeData(
     buttonColor: clLightWhite,
     textTheme: ButtonTextTheme.accent,
@@ -88,6 +94,7 @@ final lightTheme = ThemeData(
 
 /// Тёмная тема
 final darkTheme = ThemeData(
+  buttonColor: clDarkMain,
   primaryColor: clDarkWhite,
   primaryColorDark: clDarkWhite,
   backgroundColor: clDarkDark,
@@ -160,6 +167,10 @@ final darkTheme = ThemeData(
     bodyText2: smallDark,
     subtitle1: smallSubtitleDark,
     button: smallBoldDark,
+  ),
+  textTheme: TextTheme(
+    button: textButtonGreen,
+    headline1: smallDetailDarkMain, //!
   ),
   buttonTheme: ButtonThemeData(
     buttonColor: clDarkMain,
