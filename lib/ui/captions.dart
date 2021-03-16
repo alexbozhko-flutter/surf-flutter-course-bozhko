@@ -38,5 +38,7 @@ const String lblMuseum = 'Музей';
 const String lblCafe = 'Кафе';
 
 const String lblDistantion = 'Расстояние';
+const String lblSettings = 'Настройки';
 
-
+const String lblDarkTheme = 'Тёмная тема';
+const String lblSeeTutorial = 'Смотреть туториал';

@@ -189,4 +189,3 @@ TextStyle inactiveBlack = TextStyle(
 TextStyle inactiveBlackSmall = inactiveBlack.copyWith(
   fontSize: 14,
 );
-

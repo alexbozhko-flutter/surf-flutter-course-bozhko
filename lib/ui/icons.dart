@@ -224,3 +224,10 @@ SvgPicture svgIcoCafe = SvgPicture.asset(
   width: 32.0,
   height: 32.0,
 );
+
+/// Иконка Особое место от карты, согласно макета
+SvgPicture svgIcoInfo = SvgPicture.asset(
+  'res/images/icon_info.svg',
+  width: 24.0,
+  height: 24.0,
+);
