@@ -27,9 +27,9 @@ class App extends StatelessWidget {
       title: 'My Title Flutter Demo',
       theme: Provider.of<ThemeModel>(context).currentTheme,
       // theme: lightTheme, // Чтобы посмотреть другие экраны
-      // home: VisitingScreen(),
+      home: VisitingScreen(),
       // home: FiltersScreen(),
-      home: SettingsScreen(),
+      // home: SettingsScreen(),
       // home: VisitedCard(),
       // home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
