@@ -149,6 +149,12 @@ TextStyle smallDetailDarkMain = _text.copyWith(
   color: clDarkWhite,
 );
 
+/// Текстовый стиль для заголовков
+TextStyle fieldTitleCommon = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
+);
+
 /// стили табов
 TextStyle visitingDark = TextStyle(
   fontFamily: 'Roboto',

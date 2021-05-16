@@ -4,6 +4,8 @@ import 'package:places/ui/styles.dart';
 
 /// Светлая тема
 final lightTheme = ThemeData(
+  errorColor: clLightRed,
+  hintColor: clFieldCaptionColor,
   buttonColor: clLightWhite,
   primaryColor: clLightMain,
   primaryColorDark: clDarkDark,
@@ -26,6 +28,9 @@ final lightTheme = ThemeData(
     color: clLightWhite,
     brightness: Brightness.light,
   ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: clLightMain,
+  ),
   tabBarTheme: TabBarTheme(
     labelColor: clLightWhite,
     unselectedLabelColor: clLightInactiveBlack,
@@ -37,13 +42,23 @@ final lightTheme = ThemeData(
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
-    labelStyle: InputDecorationLabelDark,
-    hintStyle: InputDecorationHintDark,
-    filled: true,
-    fillColor: clLightBackground,
+    // fillColor: clLightWhite,
+    filled: false,
+
+    enabledBorder: const OutlineInputBorder(
+      borderSide: const BorderSide(color: clLightGreenBorder, width: 1.0),
+      gapPadding: 2,
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
+    focusedBorder: const OutlineInputBorder(
+      borderSide: const BorderSide(color: clLightGreenBorder, width: 2.0),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
+    ),
     border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12.0),
-      borderSide: BorderSide(style: BorderStyle.none, width: 0.0),
+      borderSide: BorderSide(
+        color: clLightGreenBorder,
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(8)),
     ),
   ),
   accentIconTheme: IconThemeData(
@@ -85,6 +100,9 @@ final lightTheme = ThemeData(
   textTheme: TextTheme(
     button: textButtonGreen,
     headline1: smallDetailLightMain,
+    subtitle1: fieldTitleCommon.copyWith(
+      color: clFieldCaptionColor,
+    ),
   ),
   buttonTheme: ButtonThemeData(
     buttonColor: clLightWhite,
@@ -94,6 +112,8 @@ final lightTheme = ThemeData(
 
 /// Тёмная тема
 final darkTheme = ThemeData(
+  errorColor: clDarkRed,
+  hintColor: clTabBarColorTransparent, //!!! поменять!
   buttonColor: clDarkMain,
   primaryColor: clDarkWhite,
   primaryColorDark: clDarkWhite,
@@ -110,6 +130,9 @@ final darkTheme = ThemeData(
     ),
     color: clDarkMain,
     brightness: Brightness.dark,
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: clLightMain,
   ),
   tabBarTheme: TabBarTheme(
     labelColor: clDarkSecondary,
@@ -134,6 +157,7 @@ final darkTheme = ThemeData(
       borderSide: BorderSide(style: BorderStyle.none, width: 0.0),
     ),
   ),
+
   accentIconTheme: IconThemeData(
     color: clDarkGreen,
     size: 24,
