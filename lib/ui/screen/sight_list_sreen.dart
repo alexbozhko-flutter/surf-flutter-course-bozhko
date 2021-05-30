@@ -74,7 +74,7 @@ class _SightListAppBarState extends State<SightListAppBar> {
                       prefixIcon: Icon(
                         Icons.search,
                         // Это точно не inputDecorationTheme
-                        color:  Theme.of(context).accentIconTheme.color,
+                        color: Theme.of(context).accentIconTheme.color,
                       ),
                       hintText: lblSearch),
                 ),

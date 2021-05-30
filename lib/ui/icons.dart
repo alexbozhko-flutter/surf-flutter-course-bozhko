@@ -235,8 +235,8 @@ SvgPicture svgIcoInfo = SvgPicture.asset(
 /// Иконка Clear
 SvgPicture svgIcoClear = SvgPicture.asset(
   'res/images/icon_clear.svg',
-  width: 24.0,
-  height: 24.0,
+  width: 20.0,
+  height: 20.0,
   color: Colors.red,
 );
 

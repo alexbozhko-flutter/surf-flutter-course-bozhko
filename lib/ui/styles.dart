@@ -18,7 +18,7 @@ TextStyle largeTitleDark = _text.copyWith(
   fontSize: 32,
   color: clDarkWhite,
 );
-
+// Необходимо будет проверить
 TextStyle largeTitleLight = _text.copyWith(
   fontWeight: FontWeight.w700,
   fontSize: 32,

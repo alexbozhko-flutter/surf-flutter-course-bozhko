@@ -46,7 +46,7 @@ const String lblSeeTutorial = 'Смотреть туториал';
 const String lblCancel = 'Отмена';
 const String lblNewPlace = 'Новое место';
 
-const String lblCreate = 'Создать';
+const String lblCreate = 'CОЗДАТЬ';
 
 const String lblCategory = 'КАТЕГОРИЯ';
 const String lblIsNotSelected = 'Не выбрано';
@@ -57,7 +57,7 @@ const String lblLat = 'ШИРОТА';
 
 const String lblPoint = 'Указать на карте';
 const String lblDescription = 'ОПИСАНИЕ';
-const String lblEnterText = 'Ввежите текст';
+const String lblEnterText = 'Введите текст';
 
 const String txtEmptyVal = '*Обязательное поле';
 const String txtWrongRangeLon = '*(0..180)';

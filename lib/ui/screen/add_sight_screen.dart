@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:places/domain/sight.dart';
 import 'package:places/mocks.dart';
-import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/captions.dart';
 import 'package:places/ui/icons.dart';
-import 'package:places/ui/styles.dart';
 
 const barHeight = 56;
 
@@ -14,11 +13,10 @@ const barHeight = 56;
 class SightListAppBar extends StatelessWidget implements PreferredSizeWidget {
   SightListAppBar({Key key})
       : preferredSize = Size.fromHeight(56),
-        // константу или выражение сюда подставить нельзя
         super(key: key);
 
   @override
-  final Size preferredSize; // default is 56.0
+  final Size preferredSize;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +24,35 @@ class SightListAppBar extends StatelessWidget implements PreferredSizeWidget {
       padding: const EdgeInsets.only(top: 24),
       child: Container(
         height: 56,
-        color: Colors.yellow,
         child: Stack(
           children: [
             Center(
               child: Text(
                 lblNewPlace,
+                style: Theme.of(context).primaryTextTheme.headline4.copyWith(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
               ),
             ),
             Positioned(
-              top: 18,
+              top: 20,
               left: 16,
-              child: Text(
-                lblCancel,
+              child: RichText(
+                text: TextSpan(
+                    text: lblCancel,
+                    style:
+                        Theme.of(context).primaryTextTheme.bodyText2.copyWith(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () {
+                        print('Отмена');
+                      }),
               ),
+
+              //
             ),
           ],
         ),
@@ -56,17 +69,25 @@ class AddSightScreen extends StatefulWidget {
   _AddSightScreenState createState() => _AddSightScreenState();
 }
 
+/// вывод заголовка для поля ввода
 class _AddSightScreenState extends State<AddSightScreen> {
-  /// вывод заголовка для поля ввода
   Widget fieldTitle(
     String caption,
   ) {
-    return Text(
-      caption,
-      style: Theme.of(context).textTheme.subtitle1.copyWith(fontSize: 12),
+    return Container(
+      alignment: Alignment.centerLeft,
+      height: 16,
+      child: Text(
+        caption,
+        style: Theme.of(context).textTheme.subtitle1.copyWith(
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),
+      ),
     );
   }
 
+  /// Фокус ноды для соотв. полей
   final _titleFocusNode = FocusNode();
   final _lonFocusNode = FocusNode();
   final _latFocusNode = FocusNode();
@@ -88,17 +109,15 @@ class _AddSightScreenState extends State<AddSightScreen> {
   /// Контролер для п. ввода описания
   final _detailController = TextEditingController();
 
+  /// Переменные для проверки валидности полей
   bool _isTitleValid = true;
-  bool _isDetailsValid = true;
-
+  bool _isDetailValid = true;
   bool _isLatValid = true;
   bool _isLonValid = true;
   bool _isLonEmpty = false;
   bool _isLatEmpty = false;
 
-  bool _retValue;
-
-  String detailValue;
+  bool _allFieldsCorrect = false;
 
   /// Возвращает текст ошибки если обязательное строковое поле пустое
   String getTextFieldErrorText(String value, FocusNode node) {
@@ -116,12 +135,15 @@ class _AddSightScreenState extends State<AddSightScreen> {
       });
     }
 
-    if (_detailController.text.isEmpty) {
+    if (_detailController.text == "") {
       setState(() {
-        _isDetailsValid = false;
+        _isDetailValid = false;
+      });
+    } else {
+      setState(() {
+        _isDetailValid = true;
       });
     }
-
     // Проверяем долготу (не пусто, <180 и >0)
     if (_lonController.text.isEmpty) {
       setState(() {
@@ -154,12 +176,17 @@ class _AddSightScreenState extends State<AddSightScreen> {
           _isLatValid = false;
         });
       } else {
-        _isLatValid = true;
+        setState(() {
+          _isLatValid = true;
+        });
       }
     }
+    setState(() {
+      _allFieldsCorrect =
+          _isTitleValid & _isDetailValid & _isLatValid & _isLonValid;
+    });
 
-
-    return _isTitleValid & _isDetailsValid & _isLatValid & _isLonValid;
+    return _allFieldsCorrect;
   }
 
   @override
@@ -211,6 +238,12 @@ class _AddSightScreenState extends State<AddSightScreen> {
     _latController.dispose();
     _lonController.dispose();
     _detailController.dispose();
+
+    _titleFocusNode.dispose();
+    _lonFocusNode.dispose();
+    _latFocusNode.dispose();
+    _detailFocusNode.dispose();
+
     super.dispose();
   }
 
@@ -241,7 +274,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     child: Column(
                       children: [
                         Container(
-                          color: Colors.lightGreenAccent,
                           height: 64,
                           child: Stack(
                             children: [
@@ -257,6 +289,12 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                 child: Text(
                                   //! Need Style
                                   lblIsNotSelected,
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .bodyText2
+                                      .copyWith(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400),
                                 ),
                               ),
                               Positioned(
@@ -267,7 +305,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                   height: 24,
                                   child: IconButton(
                                     padding: EdgeInsets.all(0),
-                                    // iconSize: 24,
                                     icon: svgIcoSelect,
                                     onPressed: () {
                                       print('Select was pressed');
@@ -285,283 +322,278 @@ class _AddSightScreenState extends State<AddSightScreen> {
                             color: Theme.of(context).hintColor,
                           ),
                         ),
-                        Container(
-                          // height: 184,
-                          color: Colors.yellow,
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 16.0, right: 16, top: 24),
-                                child: Container(
-                                  color: Colors.white,
-                                  // height: 68.0,
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.topLeft,
-                                        child: fieldTitle(
-                                          lblTitle,
-                                        ),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: 16.0, right: 16, top: 24),
+                              child: Container(
+                                child: Column(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.topLeft,
+                                      child: fieldTitle(
+                                        lblTitle,
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          top: 12,
-                                        ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 12,
+                                      ),
 
-                                        /// Поле ввода НАЗВАНИЕ
-                                        child: TextField(
-                                          focusNode: _titleFocusNode,
-                                          controller: _titleController,
-                                          textInputAction: TextInputAction.next,
-                                          autofocus: true,
-                                          style: Theme.of(context)
+                                      /// Поле ввода НАЗВАНИЕ
+                                      child: TextField(
+                                        focusNode: _titleFocusNode,
+                                        controller: _titleController,
+                                        textInputAction: TextInputAction.next,
+                                        autofocus: true,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline1
+                                            .copyWith(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w400),
+                                        onChanged: (String text) {
+                                          checkValidation();
+                                        },
+                                        decoration: InputDecoration(
+                                          errorStyle: Theme.of(context)
                                               .textTheme
-                                              .headline1,
-                                          decoration: InputDecoration(
-                                            errorStyle: Theme.of(context)
-                                                .textTheme
-                                                .headline1
-                                                .copyWith(
-                                                  color: Theme.of(context)
-                                                      .errorColor,
-                                                ),
-                                            errorText: getTextFieldErrorText(
-                                                _titleController.text,
-                                                _titleFocusNode),
-                                            contentPadding: EdgeInsets.all(11),
-                                            isDense: true,
-                                          ),
+                                              .headline1
+                                              .copyWith(
+                                                color: Theme.of(context)
+                                                    .errorColor,
+                                              ),
+                                          errorText: getTextFieldErrorText(
+                                              _titleController.text,
+                                              _titleFocusNode),
+                                          contentPadding: EdgeInsets.all(11),
+                                          isDense: true,
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 16,
-                                  right: 16,
-                                  top: 24,
-                                ),
-                                child: Container(
-                                  height: 68,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 8),
-                                          child: Container(
-                                            color: Colors.amber,
-                                            height: 68,
-                                            child: Column(
-                                              children: [
-                                                Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: fieldTitle(
-                                                    lblLat,
-                                                  ),
-                                                ),
-                                                coordinatesPadding(
-                                                  _isLatValid,
-                                                  SizedBox(
-                                                    height:
-                                                        _isLatValid ? 40 : 55,
-
-                                                    /// Поле ввода ШИРОТА
-                                                    child: TextField(
-                                                      focusNode: _latFocusNode,
-                                                      controller:
-                                                          _latController,
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      textInputAction:
-                                                          TextInputAction.next,
-                                                      autofocus: true,
-                                                      onEditingComplete: () {
-                                                        _lonFocusNode
-                                                            .requestFocus();
-                                                        setState(() {});
-                                                      },
-                                                      onChanged: (String text) {
-                                                        if (text.isEmpty) {
-                                                          text = "0";
-                                                        }
-                                                        // Чтобы
-                                                        checkValidation();
-                                                        // setState(() {});
-                                                      },
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline1,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        errorStyle:
-                                                            Theme.of(context)
-                                                                .textTheme
-                                                                .headline1
-                                                                .copyWith(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .errorColor,
-                                                                  // fontSize: 10,
-                                                                ),
-                                                        errorText: _isLatEmpty
-                                                            ? txtEmptyVal
-                                                            : (_isLatValid
-                                                                ? null
-                                                                : txtWrongRangeLat),
-                                                        contentPadding:
-                                                            EdgeInsets.only(
-                                                                left: 16,
-                                                                top: 10),
-                                                        suffixIcon:
-                                                            _latFocusNode
-                                                                    .hasFocus
-                                                                ? IconButton(
-                                                                    icon:
-                                                                        SizedBox(
-                                                                      child:
-                                                                          svgIcoClear,
-                                                                      height:
-                                                                          24,
-                                                                      width: 24,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      // _lonController.clear();
-                                                                      _latController
-                                                                              .text =
-                                                                          "0";
-                                                                    },
-                                                                  )
-                                                                : null,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                left: 16,
+                                right: 16,
+                                top: 24,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(right: 8),
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: fieldTitle(
+                                                lblLat,
+                                              ),
                                             ),
-                                          ),
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 12),
+
+                                              /// Поле ввода широты
+                                              child: TextField(
+                                                focusNode: _latFocusNode,
+                                                controller: _latController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                autofocus: true,
+                                                onEditingComplete: () {
+                                                  _lonFocusNode.requestFocus();
+                                                  setState(() {});
+                                                },
+                                                onChanged: (String text) {
+                                                  if (text.isEmpty) {
+                                                    text = "0";
+                                                  }
+                                                  checkValidation();
+                                                  setState(() {});
+                                                },
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline1,
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  errorStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .headline1
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .errorColor,
+                                                      ),
+                                                  errorText: _isLatEmpty
+                                                      ? txtEmptyVal
+                                                      : (_isLatValid
+                                                          ? null
+                                                          : txtWrongRangeLat),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 11,
+                                                          bottom: 12),
+                                                  suffixIconConstraints:
+                                                      BoxConstraints(
+                                                          minHeight: 24,
+                                                          minWidth: 24),
+                                                  suffixIcon: _latFocusNode
+                                                          .hasFocus
+                                                      ? IconButton(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  maxHeight: 20,
+                                                                  maxWidth: 20),
+                                                          padding:
+                                                              EdgeInsets.all(0),
+                                                          iconSize: 20,
+                                                          icon: svgIcoClear,
+                                                          onPressed: () {
+                                                            _latController
+                                                                .text = "0";
+                                                          },
+                                                        )
+                                                      : null,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                      Expanded(
-                                        // flex: 2,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 8),
-                                          child: Container(
-                                            color: Colors.greenAccent,
-                                            height: 68,
-                                            child: Column(
-                                              children: [
-                                                Align(
-                                                  alignment: Alignment.topLeft,
-                                                  child: fieldTitle(
-                                                    lblLong,
-                                                  ),
-                                                ),
-                                                coordinatesPadding(
-                                                  _isLonValid,
-                                                  SizedBox(
-                                                    height:
-                                                        _isLonValid ? 40 : 55,
-
-                                                    /// Поле ввода ДОЛГОТА
-                                                    child: TextField(
-                                                      focusNode: _lonFocusNode,
-                                                      controller:
-                                                          _lonController,
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      textInputAction:
-                                                          TextInputAction.next,
-                                                      autofocus: true,
-
-                                                      onEditingComplete: () {
-                                                        _detailFocusNode
-                                                            .requestFocus();
-                                                        setState(() {});
-                                                      },
-                                                      onChanged: (String text) {
-                                                        if (text.isEmpty) {
-                                                          text = "0";
-                                                        }
-                                                        // Чтобы
-                                                        checkValidation();
-                                                        setState(() {});
-                                                      },
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headline1,
-                                                      // onSubmitted: (_) => FocusScope.of(context).nextFocus(), // move focus to next
-                                                      // inputFormatters: <TextInputFormatter>[
-                                                      //   FilteringTextInputFormatter.allow(
-                                                      //       RegExp(
-                                                      //           r'^(\+|-)?((\d((\.)|\.\d{1,6})?)|(0*?\d\d((\.)|\.\d{1,6})?)|(0*?1[0-7]\d((\.)|\.\d{1,6})?)|(0*?180((\.)|\.0{1,6})?))$')),
-                                                      // ],
-
-                                                      decoration:
-                                                          InputDecoration(
-                                                        errorStyle:
-                                                            Theme.of(context)
-                                                                .textTheme
-                                                                .headline1
-                                                                .copyWith(
-                                                                  color: Theme.of(
-                                                                          context)
-                                                                      .errorColor,
-                                                                ),
-                                                        errorText: _isLonEmpty
-                                                            ? txtEmptyVal
-                                                            : (_isLonValid
-                                                                ? null
-                                                                : txtWrongRangeLon),
-                                                        contentPadding:
-                                                            EdgeInsets.only(
-                                                                left: 16,
-                                                                top: 10),
-                                                        suffixIcon:
-                                                            _lonFocusNode
-                                                                    .hasFocus
-                                                                ? IconButton(
-                                                                    icon:
-                                                                        SizedBox(
-                                                                      child:
-                                                                          svgIcoClear,
-                                                                      height:
-                                                                          24,
-                                                                      width: 24,
-                                                                    ),
-                                                                    onPressed:
-                                                                        () {
-                                                                      // _lonController.clear();
-                                                                      _lonController
-                                                                              .text =
-                                                                          "0";
-                                                                    },
-                                                                  )
-                                                                : null,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
+                                  Expanded(
+                                    // flex: 2,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 8),
+                                      child: Container(
+                                        child: Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.topLeft,
+                                              child: fieldTitle(
+                                                lblLong,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(top: 12),
+
+                                              /// Поле для ввода долготы
+                                              child: TextField(
+                                                focusNode: _lonFocusNode,
+                                                controller: _lonController,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                textInputAction:
+                                                    TextInputAction.next,
+                                                autofocus: true,
+                                                onEditingComplete: () {
+                                                  _detailFocusNode
+                                                      .requestFocus();
+                                                  setState(() {});
+                                                },
+                                                onChanged: (String text) {
+                                                  if (text.isEmpty) {
+                                                    text = "0";
+                                                  }
+
+                                                  checkValidation();
+                                                },
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline1,
+
+                                                // Хороший способ отсечь ввод некорректных значений долготы и широты
+                                                // onSubmitted: (_) => FocusScope.of(context).nextFocus(), // move focus to next
+                                                // inputFormatters: <TextInputFormatter>[
+                                                //   FilteringTextInputFormatter.allow(
+                                                //       RegExp(
+                                                //           r'^(\+|-)?((\d((\.)|\.\d{1,6})?)|(0*?\d\d((\.)|\.\d{1,6})?)|(0*?1[0-7]\d((\.)|\.\d{1,6})?)|(0*?180((\.)|\.0{1,6})?))$')),
+                                                // ],
+
+                                                decoration: InputDecoration(
+                                                  isDense: true,
+                                                  border: OutlineInputBorder(
+                                                    borderSide: BorderSide(),
+                                                  ),
+                                                  errorStyle: Theme.of(context)
+                                                      .textTheme
+                                                      .headline1
+                                                      .copyWith(
+                                                        color: Theme.of(context)
+                                                            .errorColor,
+                                                      ),
+                                                  errorText: _isLonEmpty
+                                                      ? txtEmptyVal
+                                                      : (_isLonValid
+                                                          ? null
+                                                          : txtWrongRangeLon),
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          left: 16,
+                                                          top: 11,
+                                                          bottom: 12),
+                                                  suffixIconConstraints:
+                                                      BoxConstraints(
+                                                          minHeight: 24,
+                                                          minWidth: 24),
+                                                  suffixIcon: _lonFocusNode
+                                                          .hasFocus
+                                                      ? IconButton(
+                                                          constraints:
+                                                              BoxConstraints(
+                                                                  maxHeight: 20,
+                                                                  maxWidth: 20),
+                                                          padding:
+                                                              EdgeInsets.all(0),
+                                                          iconSize: 20,
+                                                          icon: svgIcoClear,
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              _lonController
+                                                                  .text = "0";
+                                                              checkValidation();
+                                                            });
+                                                          },
+                                                        )
+                                                      : null,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          height: 48,
-                          color: Colors.grey,
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, top: 12, right: 24),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            height: 25,
+                            child: Text(
+                              lblPoint,
+                              style:
+                                  Theme.of(context).textTheme.button.copyWith(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -570,8 +602,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                             top: 24,
                           ),
                           child: Container(
-                            height: 108,
-                            color: Colors.yellow,
                             child: Column(children: [
                               Align(
                                 alignment: Alignment.topLeft,
@@ -580,12 +610,12 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                 ),
                               ),
                               Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(16.0, 12, 16, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
                                 child: Container(
-                                  color: Colors.white,
                                   height: 80,
                                   padding: EdgeInsets.all(1),
+
+                                  /// Поле ввода ОПИСАНИЕ
                                   child: TextField(
                                     focusNode: _detailFocusNode,
                                     controller: _detailController,
@@ -594,24 +624,18 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                     autofocus: true,
                                     style:
                                         Theme.of(context).textTheme.headline1,
-
-                                    onSubmitted: (text) {
-                                      print(text);
-                                      detailValue = text;
+                                    onChanged: (String text) {
+                                      checkValidation();
                                     },
-                                    // decoration: InputDecoration(
-                                    //   contentPadding: EdgeInsets.all(11),
-                                    //   isDense: true,
-                                    // ),
+                                    decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.only(
+                                          left: 16,
+                                          top: 10,
+                                          bottom: 10,
+                                          right: 16),
+                                      hintText: lblEnterText,
+                                    ),
                                   ),
-
-                                  //(
-                                  // onSubmitted: (_) => FocusScope.of(context).nextFocus(), // move focus to next
-                                  //  textInputAction: TextInputAction.next,
-                                  // autofocus: true,
-                                  // maxLines: 12,
-                                  // style: Theme.of(context).textTheme.headline1,
-                                  // ),
                                 ),
                               ),
                             ]),
@@ -621,12 +645,8 @@ class _AddSightScreenState extends State<AddSightScreen> {
                     ),
                   ),
                   Expanded(
-                    // fit: FlexFit.loose,
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      // color: Theme.of(context).scaffoldBackgroundColor,
-                      // height: double.infinity,
-                      color: Colors.red,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(16.0, 8, 16, 8),
                         child: SizedBox(
@@ -634,7 +654,9 @@ class _AddSightScreenState extends State<AddSightScreen> {
                           height: 48.0,
                           child: FlatButton(
                             autofocus: false,
-                            color: Theme.of(context).accentColor,
+                            color: _allFieldsCorrect
+                                ? Theme.of(context).accentColor
+                                : Theme.of(context).backgroundColor,
                             height: 48,
                             shape: RoundedRectangleBorder(
                               borderRadius:
@@ -646,13 +668,12 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                   .primaryTextTheme
                                   .button
                                   .copyWith(
-                                      // color:
-                                      ),
+                                    color: _allFieldsCorrect
+                                        ? Theme.of(context).primaryColorLight
+                                        : Theme.of(context).hintColor,
+                                  ),
                             ),
                             onPressed: () {
-                              print('Build Path was pressed');
-                              print(_titleController.text);
-
                               if (checkValidation()) {
                                 Sight _sightNew = Sight(
                                   _titleController.text,
@@ -671,13 +692,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                 for (int i = 0; i < mocks.length; i++) {
                                   print('--------');
                                   print(mocks[i].details);
-                                  //
-                                  // setState(){
-                                  //   mocks.add(_sight);
-                                  //
-                                  //
-                                  //
-                                  //   }
                                 }
                               }
                             },
