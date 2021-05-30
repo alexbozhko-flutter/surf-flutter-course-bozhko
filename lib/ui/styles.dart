@@ -91,6 +91,13 @@ TextStyle Dark = _text.copyWith(
   fontWeight: FontWeight.w500,
 );
 
+/// стиль для Зеленой надписи на белой кнопке
+TextStyle textButtonGreen = _text.copyWith(
+  fontSize: 16,
+  color: clDarkGreen,
+  fontWeight: FontWeight.w500,
+);
+
 TextStyle InputDecorationHintLight = _text.copyWith(
   fontSize: 14,
   color: clLightSecondary2,
@@ -127,6 +134,19 @@ TextStyle smallDetailDark = _text.copyWith(
   fontSize: 14,
   color: clDarkWhite,
   fontWeight: FontWeight.w400,
+);
+
+/// Текстовый стиль заголовка на экране фильтра (Расстояние)
+TextStyle smallDetailLightMain = _text.copyWith(
+  fontWeight: FontWeight.w400,
+  fontSize: 16,
+  color: clLightMain,
+);
+
+TextStyle smallDetailDarkMain = _text.copyWith(
+  fontWeight: FontWeight.w400,
+  fontSize: 16,
+  color: clDarkWhite,
 );
 
 /// стили табов

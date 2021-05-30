@@ -13,6 +13,7 @@ const clTabBarColorTransparent = Color(0x407C7E92);
 /// Light Theme Colors
 const clLightBackground = Color(0xFFF5F5F5);
 const clLightGreen = Color(0xFF4CAF50);
+const clLightGreenTranspanent = Color(0x104CAF50);
 const clLightYellow = Color(0xFFFCDD3D);
 const clLightRed = Color(0xFFEF4343);
 const clLightMain = Color(0xFF252849);
