@@ -8,10 +8,8 @@ import 'package:places/ui/bottom_nav_bar.dart';
 import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/captions.dart';
 import 'package:places/ui/icons.dart';
-import 'package:places/ui/screen/res/themes.dart';
 import 'package:places/ui/screen/visited_card.dart';
 import 'package:places/ui/screen/want_card.dart';
-import 'package:provider/provider.dart';
 
 /// Заглушка-список посещённых мест
 final List<Sight> visitedList = [mocks[0], mocks[1]];
@@ -94,19 +92,6 @@ class _VisitingScreenState extends State<VisitingScreen> {
           ],
         ),
         bottomNavigationBar: new PlacesBottomNavigationBar(),
-        floatingActionButton: Container(
-          width: 80,
-          height: 80,
-          child: FloatingActionButton(
-            child: Text(
-                Provider.of<ThemeModel>(context).currentTheme == lightTheme
-                    ? lblDark
-                    : lblLight),
-            onPressed: () {
-              Provider.of<ThemeModel>(context, listen: false).toggleTheme();
-            },
-          ),
-        ),
       ),
     );
   }
