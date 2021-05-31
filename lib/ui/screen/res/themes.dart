@@ -20,6 +20,8 @@ final lightTheme = ThemeData(
   primarySwatch: lightPrimarySwatch,
   brightness: Brightness.light,
   accentColorBrightness: Brightness.light,
+  highlightColor: clLightYellow,
+  hoverColor: clLightGreen,
   bottomAppBarTheme: BottomAppBarTheme(
     color: clLightWhite,
   ),
@@ -128,6 +130,9 @@ final darkTheme = ThemeData(
   accentColor: clDarkGreen,
   brightness: Brightness.dark,
   accentColorBrightness: Brightness.light,
+  highlightColor: clDarkYellow,
+  hoverColor: clDarkGreen,
+
   appBarTheme: AppBarTheme(
     textTheme: TextTheme(
       headline1: visitingDark,

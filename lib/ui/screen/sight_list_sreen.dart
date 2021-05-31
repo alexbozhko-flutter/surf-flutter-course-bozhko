@@ -1,12 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:places/mocks.dart';
+import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/bottom_nav_bar.dart';
 import 'package:places/ui/captions.dart';
 import 'package:places/ui/icons.dart';
 import 'package:places/ui/screen/sight_card.dart';
 
 const barHeight = 196;
+
+/// Кнопка с градиентом
+class RaisedGradientButton extends StatelessWidget {
+  final Widget child;
+  final Gradient gradient;
+  final double width;
+  final double height;
+  final Function onPressed;
+
+  const RaisedGradientButton({
+    Key key,
+    @required this.child,
+    this.gradient,
+    this.width = double.infinity,
+    this.height = 50.0,
+    this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        gradient: gradient,
+        borderRadius: BorderRadius.all(Radius.circular(24)),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+            onTap: onPressed,
+            child: Center(
+              child: child,
+            )),
+      ),
+    );
+  }
+}
 
 /// Кастомный AppBar
 class SightListAppBar extends StatefulWidget implements PreferredSizeWidget {
@@ -110,6 +149,41 @@ class _SightListScreenState extends State<SightListScreen> {
           ],
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: RaisedGradientButton(
+          width: 177,
+          height: 48,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 22,
+                top: 12,
+                child: svgIcoPlus,
+              ),
+              Positioned(
+                left: 54,
+                top: 17,
+                child: Text(
+                  lblNewPlaceL,
+                  style: Theme.of(context).primaryTextTheme.headline5.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.03,
+                        // color: Colors.white,
+                      ),
+                ),
+              ),
+            ],
+          ),
+          gradient: LinearGradient(
+            colors: <Color>[
+              Theme.of(context).highlightColor,
+              Theme.of(context).hoverColor
+            ],
+          ),
+          onPressed: () {
+            print('button clicked');
+          }),
       bottomNavigationBar: new PlacesBottomNavigationBar(),
     );
   }

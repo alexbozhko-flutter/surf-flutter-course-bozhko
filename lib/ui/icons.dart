@@ -246,3 +246,10 @@ SvgPicture svgIcoSelect = SvgPicture.asset(
   width: 24.0,
   height: 24.0,
 );
+
+/// Иконка Выбрать (>) согласно макета
+SvgPicture svgIcoPlus = SvgPicture.asset(
+  'res/images/icon_plus.svg',
+  width: 24.0,
+  height: 24.0,
+);

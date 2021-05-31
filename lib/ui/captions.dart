@@ -45,6 +45,7 @@ const String lblSeeTutorial = 'Смотреть туториал';
 
 const String lblCancel = 'Отмена';
 const String lblNewPlace = 'Новое место';
+const String lblNewPlaceL = 'НОВОЕ МЕСТО';
 
 const String lblCreate = 'CОЗДАТЬ';
 

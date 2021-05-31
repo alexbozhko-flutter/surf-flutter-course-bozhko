@@ -32,10 +32,10 @@ class App extends StatelessWidget {
       // home: FiltersScreen(),
       // home: SettingsScreen(),
       // home: VisitedCard(),
-      // home: SightListScreen(),
+      home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
       // home: SightDetails(sight: mocks[1]),
-      home: AddSightScreen(),
+      // home: AddSightScreen(),
     );
   }
 }
