@@ -18,7 +18,7 @@ TextStyle largeTitleDark = _text.copyWith(
   fontSize: 32,
   color: clDarkWhite,
 );
-
+// Необходимо будет проверить
 TextStyle largeTitleLight = _text.copyWith(
   fontWeight: FontWeight.w700,
   fontSize: 32,
@@ -147,6 +147,12 @@ TextStyle smallDetailDarkMain = _text.copyWith(
   fontWeight: FontWeight.w400,
   fontSize: 16,
   color: clDarkWhite,
+);
+
+/// Текстовый стиль для заголовков
+TextStyle fieldTitleCommon = _text.copyWith(
+  fontSize: 12,
+  fontWeight: FontWeight.w400,
 );
 
 /// стили табов

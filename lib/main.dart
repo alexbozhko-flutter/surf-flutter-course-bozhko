@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:places/mocks.dart';
+import 'package:places/ui/screen/add_sight_screen.dart';
 import 'package:places/ui/screen/filters_screen.dart';
 import 'package:places/ui/screen/settings_screen%20.dart';
 import 'package:places/ui/screen/sight_details.dart';
@@ -27,13 +28,14 @@ class App extends StatelessWidget {
       title: 'My Title Flutter Demo',
       theme: Provider.of<ThemeModel>(context).currentTheme,
       // theme: lightTheme, // Чтобы посмотреть другие экраны
-      home: VisitingScreen(),
+      // home: VisitingScreen(),
       // home: FiltersScreen(),
       // home: SettingsScreen(),
       // home: VisitedCard(),
-      // home: SightListScreen(),
+      home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
       // home: SightDetails(sight: mocks[1]),
+      // home: AddSightScreen(),
     );
   }
 }

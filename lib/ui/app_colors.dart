@@ -9,11 +9,14 @@ const clGreenCaption = Color(0xFF4CAF50);
 const clIndicatorColor = Color(0xFF3B3E5B);
 const clTabBarColor = Color(0xFF7C7E92);
 const clTabBarColorTransparent = Color(0x407C7E92);
+const clFieldCaptionColor = Color(0x967C7E92);
 
 /// Light Theme Colors
 const clLightBackground = Color(0xFFF5F5F5);
 const clLightGreen = Color(0xFF4CAF50);
-const clLightGreenTranspanent = Color(0x104CAF50);
+const clLightGreenTranspanent = Color(0x254CAF50);
+const clLightGreenBorder = Color(0x644CAF50);
+
 const clLightYellow = Color(0xFFFCDD3D);
 const clLightRed = Color(0xFFEF4343);
 const clLightMain = Color(0xFF252849);

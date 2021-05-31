@@ -93,7 +93,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       height: 24,
                       child: IconButton(
                         padding: EdgeInsets.all(0),
-                        // iconSize: 24,
                         icon: svgIcoInfo,
                         onPressed: () {
                           print('Info was pressed');

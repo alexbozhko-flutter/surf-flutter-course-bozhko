@@ -231,3 +231,25 @@ SvgPicture svgIcoInfo = SvgPicture.asset(
   width: 24.0,
   height: 24.0,
 );
+
+/// Иконка Clear
+SvgPicture svgIcoClear = SvgPicture.asset(
+  'res/images/icon_clear.svg',
+  width: 20.0,
+  height: 20.0,
+  color: Colors.red,
+);
+
+/// Иконка Выбрать (>) согласно макета
+SvgPicture svgIcoSelect = SvgPicture.asset(
+  'res/images/icon_select.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка Выбрать (>) согласно макета
+SvgPicture svgIcoPlus = SvgPicture.asset(
+  'res/images/icon_plus.svg',
+  width: 24.0,
+  height: 24.0,
+);
