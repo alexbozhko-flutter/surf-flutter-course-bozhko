@@ -287,7 +287,6 @@ class _AddSightScreenState extends State<AddSightScreen> {
                                 left: 16,
                                 top: 30,
                                 child: Text(
-                                  //! Need Style
                                   lblIsNotSelected,
                                   style: Theme.of(context)
                                       .primaryTextTheme

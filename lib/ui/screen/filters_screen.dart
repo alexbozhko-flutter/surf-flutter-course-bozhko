@@ -322,7 +322,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                           icon: coloredIcoArrow(
                               Theme.of(context).primaryColorDark),
                           onPressed: () {
-                            print('Arrow was pressed');
+                            Navigator.pop(context);
                           },
                         ),
                       ),

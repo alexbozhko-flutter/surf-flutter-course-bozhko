@@ -15,7 +15,7 @@ const String lblClosedMock = "закрыто до 20:00";
 
 /// Строковые константы, для отображения надписей (sight_list_screen)
 const String lblSearch = "Поиск";
-const String lblSightListScreenTitle = "Список \nинтересных мест";
+const String lblSightListScreenTitle = "Список интересных мест";
 
 const String lblChangeTheme = 'Смена темы';
 
@@ -63,3 +63,5 @@ const String lblEnterText = 'Введите текст';
 const String txtEmptyVal = '*Обязательное поле';
 const String txtWrongRangeLon = '*(0..180)';
 const String txtWrongRangeLat = '*(-90..90)';
+
+const String txtYouWhereLookingFor = 'Вы искали';

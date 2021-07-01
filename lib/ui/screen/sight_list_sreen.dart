@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:places/mocks.dart';
-import 'package:places/ui/app_colors.dart';
 import 'package:places/ui/bottom_nav_bar.dart';
 import 'package:places/ui/captions.dart';
 import 'package:places/ui/icons.dart';
+import 'package:places/ui/screen/filters_screen.dart';
 import 'package:places/ui/screen/sight_card.dart';
+import 'package:places/ui/screen/sight_search_screen.dart';
 
 const barHeight = 196;
 
@@ -62,6 +63,30 @@ class SightListAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _SightListAppBarState extends State<SightListAppBar> {
+
+  final textEditingController = TextEditingController();
+
+  void _showSearchScreen(){
+    Navigator.of(context).push(
+
+      MaterialPageRoute(builder: (context) => SightSearchScreen()),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    textEditingController.addListener(_showSearchScreen);
+  }
+
+  @override
+  void dispose(){
+    textEditingController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -103,17 +128,31 @@ class _SightListAppBarState extends State<SightListAppBar> {
                   vertical: 6,
                 ),
                 child: TextField(
+                  controller: textEditingController,
+                  readOnly: true,
+                  onChanged: (String text) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SightSearchScreen()));
+                  },
                   style: Theme.of(context).primaryTextTheme.bodyText1,
                   decoration: InputDecoration(
-                      suffixIcon: ImageIcon(
-                        icoSuffix.image,
-                        size: Theme.of(context).accentIconTheme.size,
-                        color: Theme.of(context).accentIconTheme.color,
-                      ),
-                      prefixIcon: Icon(
-                        Icons.search,
-                        // Это точно не inputDecorationTheme
-                        color: Theme.of(context).accentIconTheme.color,
+                      suffixIcon: IconButton(
+                        constraints:
+                            BoxConstraints(maxHeight: 20, maxWidth: 20),
+                        padding: EdgeInsets.all(0),
+                        iconSize: 20,
+                        icon: svgIcoFilter,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    FiltersScreen()),
+                          );
+                          print("FILTER PRESSED");
+                        },
                       ),
                       hintText: lblSearch),
                 ),

@@ -104,7 +104,7 @@ class SightDetails extends StatelessWidget {
                           iconSize: 24,
                           icon: svgIcoArrow,
                           onPressed: () {
-                            print('Arrow was pressed');
+                            Navigator.pop(context);
                           },
                         ),
                       ),

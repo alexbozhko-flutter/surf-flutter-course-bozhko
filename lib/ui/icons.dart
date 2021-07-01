@@ -80,6 +80,13 @@ SvgPicture svgIcoMap = SvgPicture.asset(
   height: 24.0,
 );
 
+/// Иконка Map от BottomNavigationBar, согласно макета
+SvgPicture svgIcoSrch = SvgPicture.asset(
+  'res/images/icon_search.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
 /// Иконка Heart от BottomNavigationBar, согласно макета
 final Widget svgIcoHeart = SvgPicture.asset(
   'res/images/icon_heart.svg',
@@ -240,6 +247,13 @@ SvgPicture svgIcoClear = SvgPicture.asset(
   color: Colors.red,
 );
 
+/// Иконка Clear для SerachBar
+SvgPicture svgIcoClearNormal = SvgPicture.asset(
+  'res/images/icon_clear.svg',
+  width: 20.0,
+  height: 20.0,
+);
+
 /// Иконка Выбрать (>) согласно макета
 SvgPicture svgIcoSelect = SvgPicture.asset(
   'res/images/icon_select.svg',
@@ -250,6 +264,13 @@ SvgPicture svgIcoSelect = SvgPicture.asset(
 /// Иконка Выбрать (>) согласно макета
 SvgPicture svgIcoPlus = SvgPicture.asset(
   'res/images/icon_plus.svg',
+  width: 24.0,
+  height: 24.0,
+);
+
+/// Иконка для кнопки Фильтр, согласно макета
+SvgPicture svgIcoFilter = SvgPicture.asset(
+  'res/images/icon_filter.svg',
   width: 24.0,
   height: 24.0,
 );

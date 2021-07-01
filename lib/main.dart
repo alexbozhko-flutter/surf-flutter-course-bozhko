@@ -5,6 +5,7 @@ import 'package:places/ui/screen/filters_screen.dart';
 import 'package:places/ui/screen/settings_screen%20.dart';
 import 'package:places/ui/screen/sight_details.dart';
 import 'package:places/ui/screen/sight_card.dart';
+import 'package:places/ui/screen/sight_search_screen.dart';
 import 'package:places/ui/screen/visited_card.dart';
 import 'package:provider/provider.dart';
 import 'ui/screen/res/themes.dart';
@@ -32,6 +33,7 @@ class App extends StatelessWidget {
       // home: FiltersScreen(),
       // home: SettingsScreen(),
       // home: VisitedCard(),
+      // home: SightSearchScreen (),
       home: SightListScreen(),
       // home: SightCard(sight: mocks[0]),
       // home: SightDetails(sight: mocks[1]),
